@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1 class="event-box2">My Events Planner!</h1>
+  <h2 class="upcoming-events">Upcoming Events:</h2>
+  <div class="events-container">
+    {% for event in events %}
+      <div class="event-box">
+        <div class="event-title"><strong>{{ event.title }}</strong></div>
+        <div class="event-tasks"></div>
+        <div class="event-info"><em>Date:</em> {{ event.date }}</div>
+        <div class="event-info"><em>Time:</em> {{ event.start_time }} - {{ event.end_time }}</div>
+        <div class="event-info"><em>Location:</em> {{ event.location }}</div>
+        <div class="event-info"><em>Description:</em> {{ event.description }}</div>
+        <div class="event-info"><em>Host:</em> {{ event.user_id.name }} ({{ event.user_id.email }})</div>
+        <div class="event-tasks"></div>
+        <h4>Tasks:</h4>
+        <ul>
+          {% for task in tasks_for_events[event.id] %}
+            {% if task.completed %}
+              <li><del>{{ task.description }}</del></li>
+            {% else %}
+              <li>{{ task.description }}</li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
+
+

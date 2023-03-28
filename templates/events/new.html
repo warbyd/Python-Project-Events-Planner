@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}New Event{% endblock %}
+
+{% block content %}
+  <h1 class="event-box2">New Event</h1>
+  <form action="/events" method="POST" class="newevent-form">
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title">
+    <br>
+    <label for="location">Location:</label>
+    <input type="text" id="location" name="location">
+    <br>
+    <label for="date">Date:</label>
+    <input type="date" id="date" name="date">
+    <br>
+    <label for="start_time">Start Time:</label>
+    <input type="time" id="start_time" name="start_time">
+    <br>
+    <label for="end_time">End Time:</label>
+    <input type="time" id="end_time" name="end_time">
+    <br>
+    <label for="description">Description:</label>
+    <textarea id="description" name="description"></textarea>
+    <br>
+    <label for="user_id">User ID:</label>
+    <input type="text" id="user_id" name="user_id">
+    <br>
+    <button type="submit" class="button">Create</button>
+  </form>
+{% endblock %}
+

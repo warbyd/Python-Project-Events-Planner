@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <div class="section-banner">
+            <a href="/">Home</a>
+            <a href="/events">Events</a>
+            <a href="/tasks">Tasks</a>
+          </div>
+          
+        </ul>
+      </nav>
+    </header>
+    <main>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul class="flash-messages">
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+      {% block content %}{% endblock %}
+    </main>
+    <footer>
+      <p>&copy; {{ current_year }} My Events Planner</p>
+    </footer>
+  </body>
+</html>
+
+

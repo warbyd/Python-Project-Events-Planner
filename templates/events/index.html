@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Events{% endblock %}
+
+{% block content %}
+  <h1 class="event-box2">Events</h1>
+  <a href="/events/new" class="button-new">Add new event</a>
+  <ul>
+    {% for event in events %}
+      <li class="event-box">
+        <div class="event-title"><strong>{{ event.title }}</strong></div>
+        <div class="event-tasks"></div>
+        <div class="event-info"><em>Date:</em> {{ event.date }}</div>
+        <div class="event-info"><em>Time:</em> {{ event.start_time }} - {{ event.end_time }}</div>
+        <div class="event-info"><em>Location:</em> {{ event.location }}</div>
+        <div class="event-info"><em>Description:</em> {{ event.description }}</div>
+        <div class="event-info"><em>Host:</em> {{ event.user_id.name }} ({{ event.user_id.email }})</div>
+        <div class="event-tasks"></div>
+        <h2 class="tasks-heading">Tasks:</h2>
+        {% if tasks_for_events[event.id]|length == 0 %}
+          <p>No tasks to complete</p>
+        {% else %}
+          <ul>
+            {% for task in tasks_for_events[event.id] %}
+              <li {% if task.completed %}style="text-decoration: line-through"{% endif %}>{{ task.description }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+        <form method="post" action="{{ url_for('events.edit_event', id=event.id) }}">
+          <button type="submit" class="button">Edit Event</button>
+        </form>
+
+        <form method="post" action="{{ url_for('events.delete_event', id=event.id) }}">
+          <button type="submit" class="button" onclick="return confirm('Are you sure you want to delete this event?');">Delete Event</button>
+        </form>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
+
+
+

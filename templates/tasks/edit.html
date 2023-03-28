@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Task{% endblock %}
+
+{% block content %}
+  <h1 class="event-box2">Edit Task</h1>
+  <form method="post" class="newevent-form" action="{{ url_for('tasks.update_task', id=task.id) }}">
+    <label for="description">Description:</label>
+    <input type="text" id="description" name="description" value="{{ task.description }}" required>
+    <br>
+    <label for="completed">Status:</label>
+    <select name="completed" id="completed">
+      <option value="True" {% if task.completed %}selected{% endif %}>Completed</option>
+      <option value="False" {% if not task.completed %}selected{% endif %}>Incomplete</option>
+    </select>
+
+    </select>
+    <br><br>
+    <button type="submit" class="button">Update Task</button>
+  </form>
+  <br>
+  <a href="/tasks" class="button">Back to tasks list</a>
+{% endblock %}
+
